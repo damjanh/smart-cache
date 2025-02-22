@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Azure.Identity" Version="1.13.2" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2"/>
         <PackageReference Include="Microsoft.Orleans.Sdk" Version="9.1.2" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="9.1.2" />

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication;
+using SmartCache.Auth;
 using SmartCache.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IEmailsService, OrleansEmailsService>();
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("BasicAuthentication", null);
+builder.Services.AddAuthorization();
 
 builder.Host.UseOrleans(static siloBuilder =>
 {
@@ -20,4 +25,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 app.Run();

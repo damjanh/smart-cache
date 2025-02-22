@@ -1,9 +1,9 @@
 @SmartCache_HostAddress = http://localhost:5161
 
 GET {{SmartCache_HostAddress}}/emails/damjanh1@email.com
-
+Authorization: Basic YWRtaW46YWRtaW4=
 ###
 
 POST {{SmartCache_HostAddress}}/emails/damjanh1@email.com
-
+Authorization: Basic YWRtaW46YWRtaW4=
 ####

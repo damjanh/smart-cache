@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartCache.Services;
 
 namespace SmartCache.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("emails/{email}")]
 public class EmailsController(IEmailsService service) : ControllerBase
