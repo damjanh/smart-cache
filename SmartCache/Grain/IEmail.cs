@@ -1,6 +1,6 @@
 namespace SmartCache.Grain;
 
-public interface IEmail
+public interface IEmail : IGrainWithStringKey
 {
     Task<bool> SetEmail(string email);
     Task<string?> GetEmail(string email); 

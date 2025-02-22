@@ -2,6 +2,6 @@ namespace SmartCache.Services;
 
 public interface IEmailsService
 {
-    string? GetEmail(string email); 
-    bool SetEmail(string email); 
+    Task<string?> GetEmail(string email); 
+    Task<bool> SetEmail(string email); 
 }

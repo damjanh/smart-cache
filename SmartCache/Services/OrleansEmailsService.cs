@@ -1,14 +1,20 @@
+using SmartCache.Grain;
+
 namespace SmartCache.Services;
 
-public class OrleansEmailsService : IEmailsService
+public class OrleansEmailsService(IGrainFactory grains) : IEmailsService
 {
-    public string? GetEmail(string email)
+    public async Task<string?> GetEmail(string email)
     {
-        throw new NotImplementedException();
+        var grain = grains.GetGrain<IEmail>(email);
+        var returned = await grain.GetEmail(email);
+        return returned;
     }
 
-    public bool SetEmail(string email)
+    public async Task<bool> SetEmail(string email)
     {
-        throw new NotImplementedException();
+        var grain = grains.GetGrain<IEmail>(email);
+        var success = await grain.SetEmail(email);
+        return success;
     }
 }

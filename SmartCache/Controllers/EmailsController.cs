@@ -8,16 +8,16 @@ namespace SmartCache.Controllers;
 public class EmailsController(IEmailsService service) : ControllerBase
 {
     [HttpGet]
-    public IActionResult GetEmail(string email)
+    public async Task<IActionResult> GetEmail(string email)
     {
-        var foundEmail =  service.GetEmail(email);
+        var foundEmail = await service.GetEmail(email);
         return string.IsNullOrEmpty(foundEmail) ? NotFound() : Ok(foundEmail); 
     }
 
     [HttpPost]
-    public IActionResult PostEmail(string email)
+    public async Task<IActionResult> PostEmail(string email)
     {
-        var success = service.SetEmail(email);
+        var success = await service.SetEmail(email);
         return success ? Created() : Conflict();
     }
 }
