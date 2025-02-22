@@ -1,6 +1,9 @@
 @SmartCache_HostAddress = http://localhost:5161
 
-GET {{SmartCache_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{SmartCache_HostAddress}}/emails/damjanh1@email.com
 
 ###
+
+POST {{SmartCache_HostAddress}}/emails/damjanh1@email.com
+
+####
