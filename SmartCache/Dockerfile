@@ -11,6 +11,7 @@ COPY ["SmartCache/SmartCache.csproj", "SmartCache/"]
 RUN dotnet restore "SmartCache/SmartCache.csproj"
 COPY . .
 WORKDIR "/src/SmartCache"
+COPY .env /app/.env
 RUN dotnet build "SmartCache.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
