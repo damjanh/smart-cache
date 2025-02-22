@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
 using SmartCache.Auth;
+using SmartCache.Middleware;
 using SmartCache.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseMiddleware<EmailValidation>();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseAuthentication();
