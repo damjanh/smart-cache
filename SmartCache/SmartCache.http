@@ -1,0 +1,6 @@
+@SmartCache_HostAddress = http://localhost:5161
+
+GET {{SmartCache_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
