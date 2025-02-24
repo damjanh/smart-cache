@@ -11,25 +11,27 @@ public class EmailGrain(
     private const int PersistDueMinutes = 5;
     
     private IGrainTimer? _timer;
+    private bool _changed;
 
     public Task<bool> SetEmail(string email)
     {
         if (state.State != null && email.Equals(state.State.Email))
         {
-            logger.LogInformation("Email already exists");
+            logger.LogInformation("Email {Email} already exists in cache.", email);
             return Task.FromResult(false);
         }
 
-        logger.LogInformation("Setting email {Email}", email);
-       state.State = new EmailDetail {
+        logger.LogInformation("Adding email: {Email} to cache.", email);
+        _changed = true;
+        state.State = new EmailDetail {
            Email = email
-       };
+        };
        return Task.FromResult(true);
     }
 
     public Task<string?> GetEmail(string email)
     {
-        logger.LogInformation("Getting email {Email}", email);
+        logger.LogInformation("Retrieving email: {Email} from cache.", email);
         return Task.FromResult(state.State.Email)!;
     }
 
@@ -56,8 +58,9 @@ public class EmailGrain(
     
     private async Task SaveStateAsync(object? _)
     {
+        if (!_changed) return;
         await state.WriteStateAsync(); // Persist state to Azure Blob Storage
-        logger.LogInformation("Saving state for email: {Email}", state.State.Email);
+        logger.LogInformation("Persisting email: {Email}", state.State.Email);
     }
 
 }
